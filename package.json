@@ -1,0 +1,24 @@
+{
+	"name": "dapper-developer-demos",
+	"subdomain": "demos",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"version": "0.0.1",
+	"engines": {
+		"node": "0.10.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/chrisharrington/DapperDeveloperDemos.git"
+	},
+	"dependencies": {
+		"bluebird": "^1.1.1",
+		"debug": "^0.7.4",
+		"express": "^3.4.8",
+		"mocha": "^1.18.2",
+		"should": "^3.2.0",
+		"sinon": "^1.9.0",
+		"sinon-as-promised": "0.0.3"
+	}
+}

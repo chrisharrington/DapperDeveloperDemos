@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+<head lang="en">
+	<meta charset="UTF-8">
+	<title>Dapper Developer - Angular JS Rotate Directive</title>
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+
+	<style type="text/css">
+		[rotate-flip] {
+			-webkit-transition:transform ease 250ms;
+			-moz-transition:transform ease 250ms;
+			-o-transition:transform ease 250ms;
+			-ms-transition:transform ease 250ms;
+			transition:transform ease 250ms;
+		}
+
+		[rotate-flip].rotated {
+			.transform(rotate(180deg));
+
+			-webkit-transform:rotate(180deg);
+			-moz-transform:rotate(180deg);
+			-o-transform:rotate(180deg);
+			-ms-transform:rotate(180deg);
+			transform:rotate(180deg);
+		}
+
+		* { font-family:Arial; }
+		button { padding:10px 30px; font-size:16px; background:#1586D6; color:white; border:none; border-radius:3px; box-shadow:0 2px 8px rgba(100, 100, 100, 0.7); outline:none !important; margin-top:30px; }
+		button:active { box-shadow:none; }
+		h1, button, div { float:left; }
+		h1, div { width:100%; }
+		h1 { margin:0; }
+		div { margin-top:30px; }
+		div>* { float:left; margin-right:20px; height:30px; padding:10px 20px; background:#E0E0E0; line-height:30px !important; display:inline-block; vertical-align:middle; box-shadow:0 2px 8px rgba(100, 100, 100, 0.4); border:solid 1px #D0D0D0; }
+		i { font-size:24px !important; font-weight:bold !important; color:#1586D6; }
+	</style>
+
+	<script type="text/javascript">
+		var app = angular.module("demo", []);
+
+		app.controller("rotateDemo", function($scope) {
+			$scope.rotated = false;
+
+			$scope.rotate = function() {
+				$scope.rotated = !$scope.rotated;
+			};
+		});
+
+		app.directive("rotateFlip", function() {
+			var first = true;
+			return {
+				restrict: "A",
+				scope: {
+					flag: "=rotateFlip"
+				},
+				link: function(scope, element) {
+					scope.$watch("flag", function() {
+						_toggle(scope, element, !first);
+						first = false;
+					});
+
+					function _toggle(scope, element) {
+						element.toggleClass("rotated", scope.flag);
+					}
+				}
+			}
+		});
+
+	</script>
+
+</head>
+<body ng-controller="rotateDemo">
+	<h1>Angular JS Rotate Demo</h1>
+	<button ng-click="rotate()">Rotate!</button>
+	<div class="rotaters">
+		<i class="fa fa-angle-up" rotate-flip="rotated"></i>
+		<span rotate-flip="rotated">rotate me!</span>
+		<img src="http://gravatar.com/avatar/9c5eac829bc1ce7488b497a7e70d198b?s=35&d=mm" alt="" rotate-flip="rotated" />
+	</div>
+</body>
+</html>
