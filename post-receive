@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd /home/ec2-user/DapperDeveloperDemos
+unset GIT_DIR
+git pull
+
+npm install
+./node_modules/forever/bin/forever stop server.js
+pkill node
+
+./node_modules/forever/bin/forever \
+start \
+-al forever.log \
+-ao out.log \
+-ae err.log \
+server.js
